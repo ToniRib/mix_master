@@ -19,6 +19,22 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
   end
 
+  def edit
+    @artist = Artist.find(params[:artist_id])
+    @song = @artist.songs.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @song = Song.find(params[:id])
+
+    if @song.update(song_params)
+      redirect_to song_path(@song)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def song_params
