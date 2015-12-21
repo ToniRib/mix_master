@@ -1,9 +1,11 @@
 class SongsController < ApplicationController
+  before_filter :find_artist, only: [:index]
+
   def index
-    if params[:artist_id].nil?
-      @songs = Song.all
+    if @artist.present?
+      @songs = @artist.songs.all
     else
-      @songs = Song.all.where(artist_id: params[:artist_id])
+      @songs = Song.all
     end
   end
 
@@ -47,5 +49,9 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit(:title)
+  end
+
+  def find_artist
+    @artist = Artist.find(params[:artist_id]) unless params[:artist_id].nil?
   end
 end
