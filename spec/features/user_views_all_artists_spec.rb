@@ -14,10 +14,4 @@ RSpec.feature "User views all artists" do
       expect(page).to have_link artist.name, href: artist_path(artist)
     end
   end
-
-  context "there are no artists yet" do
-    scenario "they see a page saying no artists added" do
-
-    end
-  end
 end
