@@ -45,6 +45,12 @@ class SongsController < ApplicationController
     end
   end
 
+  def destroy
+    @song = Song.find(params[:id]).delete
+
+    redirect_to request.referer
+  end
+
   private
 
   def song_params

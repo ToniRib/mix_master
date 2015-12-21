@@ -2,6 +2,7 @@
   <% @songs.sorted_by_title.each do |song| %>
     <li id='song_id_<%= song.id.to_s %>'>
       <%= link_to song.title, song_path(song) %>
+      <span><em>(<%= link_to 'Delete', song_path(song), method: :delete %>)</em></span>
     </li>
   <% end %>
 </ul>
