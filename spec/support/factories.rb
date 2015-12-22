@@ -3,6 +3,10 @@ FactoryGirl.define do
     name
     image_path 'http://anberlin.com/bandlg.jpg'
 
+    factory :artist_with_one_song do
+      after(:create) { |artist| create(:song, artist: artist) }
+    end
+
     factory :artist_with_songs do
       transient do
         songs_count 4
@@ -18,7 +22,7 @@ FactoryGirl.define do
     "Anberlin#{n}"
   end
 
-  sequence :title, %w(A B C).cycle do |n|
+  sequence :title, %w(A B C D).cycle do |n|
     "Title#{n}"
   end
 

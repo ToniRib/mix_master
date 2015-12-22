@@ -9,6 +9,7 @@ RSpec.feature "User creates a new song for a specific artist" do
     visit artist_path(artist)
     click_on 'New Song'
     fill_in 'song_title', with: song_title
+    select artist.name, from: 'song_artist_id'
     click_on 'Create Song'
 
     expect(page).to have_content song_title
@@ -21,6 +22,7 @@ RSpec.feature "User creates a new song for a specific artist" do
 
       visit artist_path(artist)
       click_on 'New Song'
+      select artist.name, from: 'song_artist_id'
       click_on 'Create Song'
 
       expect(page).to have_content "Title can't be blank"

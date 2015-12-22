@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.feature "User deletes a song" do
   context "user is on the artists song page" do
     scenario "the song is deleted and user returns to artist's page" do
-      artist = create(:artist) do |artist|
-        artist.songs.create(attributes_for(:song))
-      end
-
+      artist = create(:artist_with_one_song)
       song = artist.songs.first
 
       visit artist_songs_path(artist)
@@ -19,10 +16,7 @@ RSpec.feature "User deletes a song" do
 
   context "user is on the song index page" do
     scenario "the song is deleted and user returns to song index" do
-      artist = create(:artist) do |artist|
-        artist.songs.create(attributes_for(:song))
-      end
-
+      artist = create(:artist_with_one_song)
       song = artist.songs.first
 
       visit songs_path
