@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_filter :find_artist, only: [:index]
+  before_action :set_artist, only: [:index, :new, :create, :edit]
   before_action :set_song, only: [:show, :update, :destroy]
 
   def index
@@ -11,12 +11,10 @@ class SongsController < ApplicationController
   end
 
   def new
-    @artist = Artist.find(params[:artist_id])
     @song = @artist.songs.new
   end
 
   def create
-    @artist = Artist.find(params[:artist_id])
     @song = @artist.songs.new(song_params)
 
     if @song.save
@@ -30,7 +28,6 @@ class SongsController < ApplicationController
   end
 
   def edit
-    @artist = Artist.find(params[:artist_id])
     @song = @artist.songs.find(params[:id])
     render :edit
   end
@@ -54,7 +51,7 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title)
   end
 
-  def find_artist
+  def set_artist
     @artist = Artist.find(params[:artist_id]) unless params[:artist_id].nil?
   end
 
