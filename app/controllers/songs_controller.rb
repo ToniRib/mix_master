@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   before_filter :find_artist, only: [:index]
+  before_action :set_song, only: [:show, :update, :destroy]
 
   def index
     if @artist.present?
@@ -26,7 +27,6 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.find(params[:id])
   end
 
   def edit
@@ -36,8 +36,6 @@ class SongsController < ApplicationController
   end
 
   def update
-    @song = Song.find(params[:id])
-
     if @song.update(song_params)
       redirect_to song_path(@song)
     else
@@ -46,8 +44,7 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    @song = Song.find(params[:id]).delete
-
+    @song.delete
     redirect_to request.referer
   end
 
@@ -59,5 +56,9 @@ class SongsController < ApplicationController
 
   def find_artist
     @artist = Artist.find(params[:artist_id]) unless params[:artist_id].nil?
+  end
+
+  def set_song
+    @song = Song.find(params[:id])
   end
 end
