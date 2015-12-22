@@ -30,4 +30,12 @@ FactoryGirl.define do
     title
     artist
   end
+
+  factory :playlist do
+    name { generate(:playlist_name) }
+  end
+
+  sequence :playlist_name do |n|
+    "Playlist #{n}"
+  end
 end
