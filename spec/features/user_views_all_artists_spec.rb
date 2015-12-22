@@ -2,11 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "User views all artists" do
   scenario "they see a page with all artists" do
-    artists = ['Anberlin', 'Incubus', 'Young the Giant']
-
-    artists.map! do |name|
-      Artist.create(name: name, image_path: 'http://example.jpg')
-    end
+    3.times { create(:artist) }
+    artists = Artist.all
 
     visit artists_path
 
