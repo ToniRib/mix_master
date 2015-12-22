@@ -1,18 +1,3 @@
 <h1>Edit a Playlist</h1>
 
-<%= form_for(@playlist) do |f| %>
-  <%= f.text_field :name %>
-
-  <% Song.all.each do |song| %>
-    <div>
-      <% if @playlist.songs.find_by(title: song.title) %>
-        <%= check_box_tag(:song_ids, song.id, true, :name => 'playlist[song_ids][]', id: "song-#{song.id}") %>
-      <% else %>
-        <%= check_box_tag(:song_ids, song.id, false, :name => 'playlist[song_ids][]', id: "song-#{song.id}") %>
-      <% end %>
-      <%= song.title %>
-    </div>
-  <% end %>
-
-  <%= f.submit %>
-<% end %>
+<%= render partial: 'form' %>
