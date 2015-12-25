@@ -29,7 +29,6 @@ class SongsController < ApplicationController
 
   def edit
     @song = @artist.songs.find(params[:id])
-    render :edit
   end
 
   def update
