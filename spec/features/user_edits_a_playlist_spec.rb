@@ -4,7 +4,7 @@ RSpec.feature "User edits an existing playlist" do
   scenario "they see the updated attributes" do
     playlist = create(:playlist_with_songs)
     old_song = playlist.songs.first
-    new_song = create(:song)
+    new_song = create(:song, title: "New Song")
 
     new_playlist_name = 'Updated Playlist'
 
